@@ -31,3 +31,13 @@ for test_video in test_videos:
             print(e)
         except Exception as e:
             print(e)
+
+# test the invalid video - should produce an error
+path_invalid_video=os.path.join(test_dir, "./data/SampleVideo_Invalid.mp4")
+
+try:
+    media = FFProbe(path_invalid_video)
+    raise Exception("FAILED to identify invalid media")
+except FFProbeError as e:
+    # this is expected...
+    print('\n\n** Successfully identified invalid media for '+path_invalid_video)

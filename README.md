@@ -1,7 +1,7 @@
 ffprobe python module
 =====================
 
-A wrapper around the ffprobe command to extract metadata from media files.
+A wrapper around the ffprobe command to extract metadata from media files. Requires JSON support in ffprobe.
 
 Usage::
 
