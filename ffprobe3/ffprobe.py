@@ -182,6 +182,60 @@ class FFStream:
 
         return size
 
+    def width(self):
+        """
+        If this is a video stream, return the width
+        """
+        try:
+            width = self.dstream.get('width', '')
+            return int(width) if width else None
+        except ValueError:
+            raise FFProbeError('None integer width')
+
+    def height(self):
+        """
+        If this is a video stream, return the height
+        """
+        try:
+            height = self.dstream.get('height', '')
+            return int(height) if height else None
+        except ValueError:
+            raise FFProbeError('None integer height')
+
+    def aspect_ratio(self):
+        """
+        Compute the aspect ratio as a decimal. Return the value None if this is not a video stream.
+        """
+        if self.is_video():
+
+            # attempt to parse the aspect ratio used for display
+            str_disp_aspect_ratio = self.dstream['display_aspect_ratio'] if 'display_aspect_ratio' in self.dstream else None
+
+            if str_disp_aspect_ratio and 2 == len(str_disp_aspect_ratio.split(':')):
+                aspect_ratios = str_disp_aspect_ratio.split(':')
+
+                width = int(aspect_ratios[0])
+                height = int(aspect_ratios[1])
+
+                if width and height:
+                    return width / height
+
+            # if display aspect is undefined then assume the raw video height/width
+            str_width = self.dstream['width']
+            str_height = self.dstream['height']
+
+            if str_width and str_height:
+                try:
+                    width = int(str_width) if str_width else None
+                    height = int(str_height) if str_height else None
+
+                    if width and height:
+                        return width / height
+
+                except ValueError:
+                    raise FFProbeError("None integer size {}:{}".format(str_width, str_height))
+        return None
+
     def pixel_format(self):
         """
         Returns a string representing the pixel format of the video stream. e.g. yuv420p.

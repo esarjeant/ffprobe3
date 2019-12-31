@@ -41,3 +41,21 @@ try:
 except FFProbeError as e:
     # this is expected...
     print('\n\n** Successfully identified invalid media for '+path_invalid_video)
+
+# test for widescreen - ratio must be >1.37:1
+path_widescreen_video=os.path.join(test_dir, './data/SampleVideo_1280x720_1mb.mp4')
+media=FFProbe(path_widescreen_video)
+
+for stream in media.streams:
+    if stream.is_video():
+        if stream.aspect_ratio() < 1.37:
+            raise Exception("FAILED to identify aspect ratio media")
+
+# test for fullscreen - ratio must be 1.33
+path_fullscreen_video=os.path.join(test_dir, './data/SampleVideo_360x240_50mb.mp4')
+media=FFProbe(path_fullscreen_video)
+
+for stream in media.streams:
+    if stream.is_video():
+        if stream.aspect_ratio() <= 1.33:
+            raise Exception("FAILED to identify aspect ratio media")
