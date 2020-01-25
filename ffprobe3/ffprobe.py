@@ -47,18 +47,6 @@ class FFProbe:
                 line = line.decode('UTF-8').strip()
                 jstdout += line
 
-            # for line in iter(p.stderr.readline, b''):
-            #     line = line.decode('UTF-8')
-            #
-            #     if '[STREAM]' in line:
-            #         stream = True
-            #         data_lines = []
-            #     elif '[/STREAM]' in line and stream:
-            #         stream = False
-            #         self.streams.append(FFStream(data_lines))
-            #     elif stream:
-            #         data_lines.append(line)
-
             p.stdout.close()
             p.stderr.close()
 
@@ -107,20 +95,6 @@ class FFStream:
 
         except:
             self.dstream['framerate'] = None
-
-    # def __init__(self, data_lines):
-    #     for line in data_lines:
-    #         self.__dict__.update({key: value for key, value, *_ in [line.strip().split('=')]})
-    #
-    #         try:
-    #             self.__dict__['framerate'] = round(
-    #                 functools.reduce(
-    #                     operator.truediv, map(int, self.__dict__.get('avg_frame_rate', '').split('/'))
-    #                 )
-    #             )
-    #
-    #         except ValueError:
-    #             self.__dict__['framerate'] = None
 
     def __repr__(self):
         if self.is_video():
