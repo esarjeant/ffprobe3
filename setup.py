@@ -1,22 +1,23 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 from distutils.core import setup
 
 setup(
-    name='ffprobe3',
-    version='0.1.2',
+    name='ffprobe3-esarjeant',
+    version='0.1.3',
     description="""
-    Original Project: ffprobe (https://pypi.python.org/pypi/ffprobe)
+    Original Project: ffprobe3 (https://github.com/DheerendraRathor/ffprobe3)
 
     A wrapper around ffprobe command to extract metadata from media files.
 
-    This project which is maintained by Dheerendra Rathor is a Python 3 port of original ffprobe.
+    This project which is maintained by Eric Sarjeant is a Python 3 port of original ffprobe3 which is itself a fork
+    of ffprobe.
     """,
     author='Simon Hargreaves',
     author_email='simon@simon-hargreaves.com',
-    maintainer='Dheerendra Rathor',
-    maintainer_email='dheeru.rathor14@gmail.com',
-    url='https://github.com/DheerendraRathor/ffprobe3',
+    maintainer='Eric Sarjeant',
+    maintainer_email='eric@sarjeant.us',
+    url='https://github.com/esarjeant/ffprobe3',
     packages=['ffprobe3'],
     keywords='ffmpeg, ffprobe, mpeg, mp4',
     classifiers=[
